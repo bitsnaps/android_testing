@@ -16,7 +16,7 @@ public class BodyMassIndexTest {
     public void testBodyMassIndexCalculation() {
         double weight = 55.0;
         double height = 1.5;
-        MainActivity.BodyMassIndex bodyMassIndex = new MainActivity.BodyMassIndex(weight, height);
+        BodyMassIndex bodyMassIndex = new BodyMassIndex(weight, height);
         assertEquals(bodyMassIndex.calculate(), 24.44, 0.01);
     }
 

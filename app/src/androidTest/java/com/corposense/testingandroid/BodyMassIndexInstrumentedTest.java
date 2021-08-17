@@ -49,10 +49,13 @@ public class BodyMassIndexInstrumentedTest {
 
     @Test
     public void testChangedText(){
-        onView(withId(R.id.edWeight)).perform(typeText("55.0"), closeSoftKeyboard());
-        onView(withId(R.id.edHeight)).perform(typeText("1.5"), closeSoftKeyboard());
+        Double weight = 55.0;
+        Double height = 1.5;
+        onView(withId(R.id.edWeight)).perform(typeText(weight.toString()), closeSoftKeyboard());
+        onView(withId(R.id.edHeight)).perform(typeText(height.toString()), closeSoftKeyboard());
         onView(withId(R.id.btnCalc)).perform(click());
-        onView(withId(R.id.tvResult)).check(matches(withText( "Your BMI = 24.444444444444443 kg/m2")));
+        Double result = new BodyMassIndex(weight, height).calculate(); //=24.444444444444443
+        onView(withId(R.id.tvResult)).check(matches(withText( "Your BMI = "+result+" kg/m2")));
     }
 
     @Test
@@ -74,7 +77,7 @@ public class BodyMassIndexInstrumentedTest {
                 .perform(click())               // click() is a ViewAction
                 .check(matches(isDisplayed())); // matches(isDisplayed()) is a ViewAssertion
 
-        mInstrumentation.sendStringSync("Some text to send.");
+        mInstrumentation.sendStringSync("Some text to send");
 
         onView(withId(R.id.tvResult)).check(matches(withText("Please enter correct values...")));
     }
