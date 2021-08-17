@@ -35,6 +35,8 @@ public class BodyMassIndexInstrumentedTest {
 
 
     private Context appContext = InstrumentationRegistry.getTargetContext();
+    public static final Double WEIGHT_VALUE = 55.0;
+    public static final Double HEIGHT_VALUE = 1.5;
 
     @Before
     public void setup() throws Exception{
@@ -47,19 +49,20 @@ public class BodyMassIndexInstrumentedTest {
         assertEquals("com.corposense.testingandroid", appContext.getPackageName());
     }
 
-    @Test
-    public void testChangedText(){
-        Double weight = 55.0;
-        Double height = 1.5;
-        onView(withId(R.id.edWeight)).perform(typeText(weight.toString()), closeSoftKeyboard());
-        onView(withId(R.id.edHeight)).perform(typeText(height.toString()), closeSoftKeyboard());
-        onView(withId(R.id.btnCalc)).perform(click());
-        Double result = new BodyMassIndex(weight, height).calculate(); //=24.444444444444443
-        onView(withId(R.id.tvResult)).check(matches(withText( "Your BMI = "+result+" kg/m2")));
+    private double calculateBMI(){
+        return new BodyMassIndex(WEIGHT_VALUE, HEIGHT_VALUE).calculate(); //=24.444444444444443
     }
 
     @Test
-    public void testMainActivity(){
+    public void testChangedText(){
+        onView(withId(R.id.edWeight)).perform(typeText(WEIGHT_VALUE.toString()), closeSoftKeyboard());
+        onView(withId(R.id.edHeight)).perform(typeText(HEIGHT_VALUE.toString()), closeSoftKeyboard());
+        onView(withId(R.id.btnCalc)).perform(click());
+        onView(withId(R.id.tvResult)).check(matches(withText( "Your BMI = "+calculateBMI()+" kg/m2")));
+    }
+
+    @Test
+    public void testEmptyValues(){
         Instrumentation mInstrumentation = getInstrumentation();
         Instrumentation.ActivityMonitor monitor = mInstrumentation.addMonitor(MainActivity.class.getName(), null, false);
         Intent intent = new Intent(Intent.ACTION_MAIN);

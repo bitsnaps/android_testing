@@ -12,11 +12,12 @@ import static org.junit.Assert.*;
  */
 public class BodyMassIndexTest {
 
+    public static final Double WEIGHT_VALUE = 55.0;
+    public static final Double HEIGHT_VALUE = 1.5;
+
     @Test
     public void testBodyMassIndexCalculation() {
-        double weight = 55.0;
-        double height = 1.5;
-        BodyMassIndex bodyMassIndex = new BodyMassIndex(weight, height);
+        BodyMassIndex bodyMassIndex = new BodyMassIndex(WEIGHT_VALUE, HEIGHT_VALUE);
         assertEquals(bodyMassIndex.calculate(), 24.44, 0.01);
     }
 
