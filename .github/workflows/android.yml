@@ -36,7 +36,7 @@ jobs:
         target: default
         arch: x86
         profile: Nexus 6
-        script: ./gradlew connectedDebugAndroidTest --stacktrace
+        script: ./gradlew connectedDebugAndroidTest --stacktrace # use connectedCheck for ubuntu-latest
 
 #    - name: Build Debug with Gradle
 #      run: ./gradlew assembleDebug
