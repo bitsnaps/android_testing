@@ -8,8 +8,8 @@ on:
 
 jobs:
   build:
-    #runs-on: macos-latest
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
+    #runs-on: ubuntu-latest
     continue-on-error: false
     steps:
 
@@ -38,5 +38,5 @@ jobs:
         profile: Nexus 6
         script: ./gradlew connectedDebugAndroidTest --stacktrace
 
-    - name: Build Debug with Gradle
-      run: ./gradlew assembleDebug
+#    - name: Build Debug with Gradle
+#      run: ./gradlew assembleDebug
